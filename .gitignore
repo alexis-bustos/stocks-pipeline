@@ -1,0 +1,41 @@
+# ========================
+# SECRETS
+# ========================
+.env
+*.tfvars
+terraform.tfvars
+
+# ========================
+# Terraform
+# ========================
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# ========================
+# Python
+# ========================
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+
+# ========================
+# Lambda deployment packages
+# ========================
+lambdas/ingestion/package/
+lambdas/retrieval/package/
+*.zip
+
+# ========================
+# IDE / OS
+# ========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
