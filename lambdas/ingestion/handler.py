@@ -121,7 +121,7 @@ def get_previous_trading_day():
     gracefully in fetch_daily_data().
     """
     today = datetime.now(timezone.utc).date()
-    yesterday = today - timedelta(days=2)
+    yesterday = today - timedelta(days=1)
 
     # Walk back past weekends: Saturday (5) → Friday, Sunday (6) → Friday
     while yesterday.weekday() >= 5:  # 5 = Saturday, 6 = Sunday
