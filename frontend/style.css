@@ -23,8 +23,8 @@
   --accent-red: #ff4757;
   --accent-green-bg: rgba(0, 220, 130, 0.08);
   --accent-red-bg: rgba(255, 71, 87, 0.08);
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 /* --- Reset & Base --- */
@@ -84,7 +84,7 @@ body {
 .subtitle {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  max-width: 500px;
+  max-width: 525px;
 }
 
 /* --- Status Badge --- */
@@ -118,8 +118,13 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 /* --- Featured Card (Today's Top Mover) --- */
@@ -134,17 +139,27 @@ body {
 }
 
 .featured::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-green),
+    transparent
+  );
 }
 
 .featured.loss::before {
-  background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-red),
+    transparent
+  );
 }
 
 .featured-label {
@@ -202,8 +217,12 @@ body {
 }
 
 /* Color coding: gain vs loss */
-.gain { color: var(--accent-green); }
-.loss { color: var(--accent-red); }
+.gain {
+  color: var(--accent-green);
+}
+.loss {
+  color: var(--accent-red);
+}
 
 /* --- History Section --- */
 .history {
@@ -323,7 +342,9 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* --- Error State --- */
@@ -354,8 +375,14 @@ body {
 
 /* --- Animations --- */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .fade-in {
@@ -368,13 +395,27 @@ body {
 }
 
 /* Stagger the row animations */
-.movers-table tbody tr:nth-child(1) { animation-delay: 0.05s; }
-.movers-table tbody tr:nth-child(2) { animation-delay: 0.10s; }
-.movers-table tbody tr:nth-child(3) { animation-delay: 0.15s; }
-.movers-table tbody tr:nth-child(4) { animation-delay: 0.20s; }
-.movers-table tbody tr:nth-child(5) { animation-delay: 0.25s; }
-.movers-table tbody tr:nth-child(6) { animation-delay: 0.30s; }
-.movers-table tbody tr:nth-child(7) { animation-delay: 0.35s; }
+.movers-table tbody tr:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.movers-table tbody tr:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.movers-table tbody tr:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.movers-table tbody tr:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.movers-table tbody tr:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.movers-table tbody tr:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.movers-table tbody tr:nth-child(7) {
+  animation-delay: 0.35s;
+}
 
 /* --- Responsive --- */
 @media (max-width: 600px) {
