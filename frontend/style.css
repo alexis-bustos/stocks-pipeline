@@ -84,7 +84,7 @@ body {
 .subtitle {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  max-width: 525px;
+  max-width: 550px;
 }
 
 /* --- Status Badge --- */
