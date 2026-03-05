@@ -4,6 +4,14 @@
 terraform {
   required_version = ">= 1.0"
 
+  backend "s3" {
+    bucket         = "stocks-pipeline-tfstate-062700375064"
+    key            = "stocks-pipeline/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "stocks-pipeline-tf-locks"
+    encrypt        = true
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"

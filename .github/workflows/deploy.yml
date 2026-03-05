@@ -1,0 +1,101 @@
+# ============================================================
+# CI/CD Pipeline — Auto-deploy on push to main
+# ============================================================
+# This workflow:
+#   1. Checks out the code
+#   2. Runs terraform fmt to verify code formatting
+#   3. Runs terraform plan to preview changes
+#   4. Runs terraform apply to deploy infrastructure
+#   5. Syncs the frontend to S3
+#
+# Secrets required (set in GitHub repo Settings → Secrets):
+#   - AWS_ACCESS_KEY_ID
+#   - AWS_SECRET_ACCESS_KEY
+#   - MASSIVE_API_KEY
+# ============================================================
+
+name: Deploy Stocks Pipeline
+
+on:
+  push:
+    branches: [main]
+
+  # Allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+  TF_VERSION: 1.7.0
+
+jobs:
+  deploy:
+    name: Deploy Infrastructure & Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      # --- Checkout code ---
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # --- Set up Terraform ---
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+
+      # --- Configure AWS credentials ---
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # --- Terraform Format Check ---
+      - name: Terraform Format Check
+        working-directory: infra
+        run: terraform fmt -check
+        continue-on-error: true
+
+      # --- Terraform Init ---
+      - name: Terraform Init
+        working-directory: infra
+        run: terraform init
+
+      # --- Create tfvars from secrets ---
+      - name: Create terraform.tfvars
+        working-directory: infra
+        run: |
+          cat > terraform.tfvars <<EOF
+          massive_api_key = "${{ secrets.MASSIVE_API_KEY }}"
+          aws_region      = "${{ env.AWS_REGION }}"
+          EOF
+
+      # --- Terraform Plan ---
+      - name: Terraform Plan
+        working-directory: infra
+        run: terraform plan -out=tfplan
+
+      # --- Terraform Apply ---
+      - name: Terraform Apply
+        working-directory: infra
+        run: terraform apply -auto-approve tfplan
+
+      # --- Deploy Frontend to S3 ---
+      - name: Deploy Frontend
+        working-directory: infra
+        run: |
+          BUCKET_NAME=$(terraform output -raw frontend_bucket_name)
+          aws s3 sync ../frontend/ s3://$BUCKET_NAME --delete
+
+      # --- Print Live URLs ---
+      - name: Output URLs
+        working-directory: infra
+        run: |
+          echo "========================================"
+          echo "Deployment Complete!"
+          echo "========================================"
+          echo "API URL:      $(terraform output -raw api_url)"
+          echo "Frontend URL: $(terraform output -raw frontend_url)"
+          echo "========================================"
