@@ -121,7 +121,7 @@ def get_previous_trading_day():
     gracefully in fetch_daily_data().
     """
     today = datetime.now(timezone.utc).date()
-    yesterday = today - timedelta(days=1)
+    yesterday = today - timedelta(days=2)
 
     # Walk back past weekends: Saturday (5) → Friday, Sunday (6) → Friday
     while yesterday.weekday() >= 5:  # 5 = Saturday, 6 = Sunday
@@ -140,7 +140,8 @@ def lambda_handler(event, context):
     EventBridge sends an event daily, but we don't need anything from it.
     The 'event' and 'context' parameters are required by AWS Lambda.
     """
-    date_str = get_previous_trading_day()
+    # Allow manual date override for backfilling, otherwise use previous trading day
+    date_str = event.get("date") if event.get("date") else get_previous_trading_day()
     logger.info(f"Fetching stock data for: {date_str}")
 
     results = []
