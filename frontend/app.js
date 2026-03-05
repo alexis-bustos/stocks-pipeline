@@ -12,9 +12,10 @@
  */
 
 // ============================================================
-// CONFIGURATION — UPDATE THIS AFTER DEPLOYING
+// CONFIGURATION — UPDATED THIS AFTER DEPLOYING
 // ============================================================
-const API_URL = "YOUR_API_GATEWAY_URL_HERE/movers";
+const API_URL =
+  "https://hk76xxomxh.execute-api.us-east-1.amazonaws.com/prod/movers";
 // Example: "https://abc123.execute-api.us-east-1.amazonaws.com/prod/movers"
 // Get this value by running: terraform output api_url
 
@@ -133,7 +134,7 @@ function renderTable(movers) {
         </td>
         <td class="price-cell">${formatPrice(mover.close_price)}</td>
       </tr>
-    `
+    `,
     )
     .join("");
 }
@@ -185,7 +186,9 @@ async function fetchMovers() {
     setStatus("live", `${movers.length} days loaded`);
   } catch (error) {
     console.error("Failed to fetch movers:", error);
-    showError("Unable to connect to the API. Please check the API URL configuration.");
+    showError(
+      "Unable to connect to the API. Please check the API URL configuration.",
+    );
   }
 }
 
