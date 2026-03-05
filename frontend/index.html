@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Movers — Daily Top Mover Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-top">
+          <div class="logo">
+            <span class="logo-icon">◆</span>
+            <span class="logo-text">STOCK MOVERS</span>
+          </div>
+          <div class="status-badge" id="statusBadge">
+            <span class="status-dot"></span>
+            <span class="status-text">Loading...</span>
+          </div>
+        </div>
+        <p class="subtitle">
+          Tracking the biggest daily move across AAPL, MSFT, GOOGL, AMZN, TSLA,
+          NVDA
+        </p>
+      </header>
+
+      <!-- Today's Featured Mover -->
+      <section class="featured" id="featuredCard">
+        <div class="featured-label">TODAY'S TOP MOVER</div>
+        <div class="featured-content" id="featuredContent">
+          <div class="loader"></div>
+        </div>
+      </section>
+
+      <!-- History Table -->
+      <section class="history">
+        <div class="history-header">
+          <h2 class="history-title">7-Day History</h2>
+        </div>
+        <div class="table-wrapper">
+          <table class="movers-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Ticker</th>
+                <th>% Change</th>
+                <th>Close Price</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr>
+                <td colspan="4" class="loading-cell">
+                  <div class="loader"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>
+          Data sourced from
+          <a href="https://massive.com" target="_blank" rel="noopener"
+            >Massive.com</a
+          >
+          · Updated daily after market close
+        </p>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

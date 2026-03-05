@@ -1,0 +1,406 @@
+/* ============================================================
+   Stock Movers Dashboard — Styles
+   
+   Design direction: Dark, editorial finance dashboard.
+   Think Bloomberg terminal meets modern design.
+   
+   Color coding (from the rubric bonus):
+     Green (#00dc82) = stock gained
+     Red   (#ff4757) = stock lost
+   ============================================================ */
+
+/* --- CSS Variables for consistency --- */
+:root {
+  --bg-primary: #0a0e17;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2332;
+  --bg-table-row: #0f1623;
+  --border: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --accent-green: #00dc82;
+  --accent-red: #ff4757;
+  --accent-green-bg: rgba(0, 220, 130, 0.08);
+  --accent-red-bg: rgba(255, 71, 87, 0.08);
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* --- Header --- */
+.header {
+  margin-bottom: 2.5rem;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo-icon {
+  color: var(--accent-green);
+  font-size: 1.25rem;
+}
+
+.logo-text {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+}
+
+/* --- Status Badge --- */
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.status-badge.live .status-dot {
+  background: var(--accent-green);
+  box-shadow: 0 0 6px var(--accent-green);
+  animation: pulse 2s infinite;
+}
+
+.status-badge.error .status-dot {
+  background: var(--accent-red);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* --- Featured Card (Today's Top Mover) --- */
+.featured {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+}
+
+.featured.loss::before {
+  background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+}
+
+.featured-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.featured-content {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.featured-ticker {
+  font-family: var(--font-mono);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.featured-change {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.featured-meta {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.featured-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.featured-meta-label {
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.featured-meta-value {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Color coding: gain vs loss */
+.gain { color: var(--accent-green); }
+.loss { color: var(--accent-red); }
+
+/* --- History Section --- */
+.history {
+  margin-bottom: 2rem;
+}
+
+.history-header {
+  margin-bottom: 1rem;
+}
+
+.history-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.table-wrapper {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* --- Table --- */
+.movers-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.movers-table thead {
+  background: var(--bg-card);
+}
+
+.movers-table th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  text-align: left;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.movers-table td {
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.movers-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.movers-table tbody tr {
+  background: var(--bg-table-row);
+  transition: background 0.2s ease;
+}
+
+.movers-table tbody tr:hover {
+  background: var(--bg-card-hover);
+}
+
+/* Ticker column styling */
+.ticker-cell {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Percent change pill */
+.change-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+}
+
+.change-pill.gain {
+  background: var(--accent-green-bg);
+  color: var(--accent-green);
+}
+
+.change-pill.loss {
+  background: var(--accent-red-bg);
+  color: var(--accent-red);
+}
+
+/* Price column */
+.price-cell {
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+/* Date column */
+.date-cell {
+  color: var(--text-secondary);
+}
+
+/* Loading state */
+.loading-cell {
+  text-align: center;
+  padding: 2rem;
+}
+
+/* --- Loader spinner --- */
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent-green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Error State --- */
+.error-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--accent-red);
+  font-size: 0.9rem;
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--text-primary);
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.movers-table tbody tr {
+  animation: fadeIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+/* Stagger the row animations */
+.movers-table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+.movers-table tbody tr:nth-child(2) { animation-delay: 0.10s; }
+.movers-table tbody tr:nth-child(3) { animation-delay: 0.15s; }
+.movers-table tbody tr:nth-child(4) { animation-delay: 0.20s; }
+.movers-table tbody tr:nth-child(5) { animation-delay: 0.25s; }
+.movers-table tbody tr:nth-child(6) { animation-delay: 0.30s; }
+.movers-table tbody tr:nth-child(7) { animation-delay: 0.35s; }
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.25rem 1rem;
+  }
+
+  .featured-content {
+    gap: 1rem;
+  }
+
+  .featured-ticker {
+    font-size: 2rem;
+  }
+
+  .featured-change {
+    font-size: 1.25rem;
+  }
+
+  .featured-meta {
+    gap: 1.25rem;
+  }
+
+  .movers-table th,
+  .movers-table td {
+    padding: 0.7rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
