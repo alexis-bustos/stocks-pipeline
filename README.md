@@ -18,16 +18,16 @@ This project implements a **three-tier serverless architecture**:
 
 The backend uses **two independent Lambda functions**:
 
-- **Ingestion Lambda** — Triggered daily by EventBridge. Fetches stock data from Polygon.io, calculates percentage change for each ticker, identifies the top mover, and writes the result to DynamoDB.
+- **Ingestion Lambda** — Triggered daily by EventBridge. Fetches stock data from Massive.com, calculates percentage change for each ticker, identifies the top mover, and writes the result to DynamoDB.
 - **Retrieval Lambda** — Invoked by API Gateway on `GET /movers`. Reads the last 7 days of results from DynamoDB and returns clean JSON.
 
-These functions share no code and have independent IAM roles with least-privilege permissions.
+These functions share no code and have independent IAM roles with the "principle of least-privilege" permissions.
 
 ## Tech Stack
 
 - **IaC:** Terraform
 - **Runtime:** Python 3.9
-- **Stock API:** Polygon.io (Free Tier)
+- **Stock API:** Massive.com (Free Tier)
 - **AWS Services:** Lambda, DynamoDB, API Gateway, EventBridge, S3
 
 ## Prerequisites
@@ -35,7 +35,7 @@ These functions share no code and have independent IAM roles with least-privileg
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) configured with your credentials
 - [Terraform](https://developer.hashicorp.com/terraform/install) >= 1.0
 - Python 3.9+
-- A free [Polygon.io](https://polygon.io/) API key
+- A free [Massive.com](https://massive.com/) API key
 
 ## Project Structure
 
@@ -69,7 +69,7 @@ stocks-pipeline/
 ### 1. Clone and Configure
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/stocks-pipeline.git
+git clone https://github.com/alexis-bustos/stocks-pipeline.git
 cd stocks-pipeline
 ```
 
@@ -78,7 +78,7 @@ cd stocks-pipeline
 Create a `terraform.tfvars` file in the `infra/` directory (this file is gitignored):
 
 ```hcl
-polygon_api_key = "your-polygon-api-key-here"
+massive_api_key = "your-massive-api-key-here"
 aws_region      = "us-east-1"
 ```
 
