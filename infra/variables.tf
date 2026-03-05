@@ -8,8 +8,8 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "polygon_api_key" {
-  description = "API key for Polygon.io stock data"
+variable "massive_api_key" {
+  description = "API key for Massive.com stock data"
   type        = string
   sensitive   = true  # Terraform will mask this in output
 }
