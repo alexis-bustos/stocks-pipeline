@@ -11,7 +11,7 @@ variable "aws_region" {
 variable "massive_api_key" {
   description = "API key for Massive.com stock data"
   type        = string
-  sensitive   = true  # Terraform will mask this in output
+  sensitive   = true # Terraform will mask this in output
 }
 
 variable "project_name" {

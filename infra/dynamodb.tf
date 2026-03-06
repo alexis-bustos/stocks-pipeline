@@ -21,7 +21,7 @@ resource "aws_dynamodb_table" "top_movers" {
   billing_mode = "PAY_PER_REQUEST" # Free tier: 25 read/write capacity units
 
   hash_key  = "record_type" # Partition key
-  range_key = "date"         # Sort key
+  range_key = "date"        # Sort key
 
   attribute {
     name = "record_type"

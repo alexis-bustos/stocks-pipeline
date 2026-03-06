@@ -29,7 +29,7 @@ resource "aws_s3_bucket_website_configuration" "frontend" {
   }
 
   error_document {
-    key = "index.html"  # SPA: route all errors back to index.html
+    key = "index.html" # SPA: route all errors back to index.html
   }
 }
 
