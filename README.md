@@ -161,7 +161,7 @@ The ingestion and retrieval Lambda functions are fully independent — separate 
 - **CloudWatch Alarms**: Alert via SNS if the ingestion Lambda fails, so data gaps are caught immediately.
 - **Data Validation**: Verify that the Massive API response contains valid open/close prices before calculating percentage change.
 - **Caching**: Add a TTL-based cache on the API Gateway response to reduce Lambda invocations for repeated frontend requests.
-- **State locking:** Currently using DynamoDB-based locking. Terraform has deprecated this in favor of S3-native locking via use_lockfile. A future iteration would migrate to the S3 approach and remove the DynamoDB lock table.
+- **State locking:** Currently using DynamoDB-based locking. Terraform has deprecated this in favor of S3-native locking via use_lockfile. In a future iteration, I would migrate to the S3 approach and remove the DynamoDB lock table.
 
 ## License
 
