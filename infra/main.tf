@@ -8,7 +8,7 @@ terraform {
     bucket         = "stocks-pipeline-tfstate-062700375064"
     key            = "stocks-pipeline/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "stocks-pipeline-tf-locks"
+    dynamodb_table = "stocks-pipeline-tf-locks" # DynamoDB locking is deprecated; migrating to use_lockfile in a future iteration.
     encrypt        = true
   }
 

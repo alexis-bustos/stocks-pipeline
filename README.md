@@ -156,11 +156,12 @@ API keys are stored in `terraform.tfvars` (gitignored) and injected into Lambda 
 
 The ingestion and retrieval Lambda functions are fully independent — separate code, separate IAM roles with least-privilege permissions (ingestion can only `PutItem`, retrieval can only `Query`), and separate triggers. This means a change to the stock-fetching logic has zero impact on the API layer, and vice versa.
 
-### What I Would Add Next
+### What I Would Add Next or Improve On
 
 - **CloudWatch Alarms**: Alert via SNS if the ingestion Lambda fails, so data gaps are caught immediately.
 - **Data Validation**: Verify that the Massive API response contains valid open/close prices before calculating percentage change.
 - **Caching**: Add a TTL-based cache on the API Gateway response to reduce Lambda invocations for repeated frontend requests.
+- **State locking:** Currently using DynamoDB-based locking. Terraform has deprecated this in favor of S3-native locking via use_lockfile. A future iteration would migrate to the S3 approach and remove the DynamoDB lock table.
 
 ## License
 
