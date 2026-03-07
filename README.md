@@ -26,7 +26,7 @@ These functions share no code and have independent IAM roles with the "principle
 ## Tech Stack
 
 - **IaC:** Terraform
-- **Runtime:** Python 3.9
+- **Runtime:** Python 3.14
 - **Stock API:** Massive.com (Free Tier)
 - **AWS Services:** Lambda, DynamoDB, API Gateway, EventBridge, S3
 
@@ -34,7 +34,7 @@ These functions share no code and have independent IAM roles with the "principle
 
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) configured with your credentials
 - [Terraform](https://developer.hashicorp.com/terraform/install) >= 1.0
-- Python 3.9+
+- Python 3.14
 - A free [Massive.com](https://massive.com/) API key
 
 ## Project Structure
