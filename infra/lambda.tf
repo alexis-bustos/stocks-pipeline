@@ -66,7 +66,7 @@ resource "aws_lambda_function" "ingestion" {
   function_name    = "${var.project_name}-ingestion"
   role             = aws_iam_role.ingestion_lambda_role.arn
   handler          = "handler.lambda_handler"
-  runtime          = "python3.14"
+  runtime          = "python3.13"
   timeout          = 120 # 2 minutes (needs time for rate-limited API calls)
   filename         = data.archive_file.ingestion_zip.output_path
   source_code_hash = data.archive_file.ingestion_zip.output_base64sha256
@@ -130,7 +130,7 @@ resource "aws_lambda_function" "retrieval" {
   function_name    = "${var.project_name}-retrieval"
   role             = aws_iam_role.retrieval_lambda_role.arn
   handler          = "handler.lambda_handler"
-  runtime          = "python3.14"
+  runtime          = "python3.13"
   timeout          = 10 # Fast — just a DynamoDB query
   filename         = data.archive_file.retrieval_zip.output_path
   source_code_hash = data.archive_file.retrieval_zip.output_base64sha256
