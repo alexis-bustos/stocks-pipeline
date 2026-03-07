@@ -4,7 +4,7 @@ A fully automated serverless system that tracks which tech stock from a curated 
 
 ## Architecture Overview
 
-![Architecture Diagram](architecture-diagram.svg)
+![Architecture Diagram](PennymacArchitectureDiagram.svg)
 
 This project implements a **three-tier serverless architecture**:
 
